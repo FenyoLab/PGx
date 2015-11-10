@@ -30,7 +30,7 @@ python pgx_bed.py oncoproteome hits.txt > hits.bed
 ```
 If the second argument is missing, the scripts assume the input will be piped into `STDIN`, which means it is possible to generate one liners such as:
 ```bash
-echo EATLSNR | pgx_query oncoproteome | pgx_bed oncoproteome
+echo SPPDSPTDALMQLAK | pgx_query oncoproteome | pgx_bed oncoproteome
 ```
 
 ## Miscellaneous Scripts

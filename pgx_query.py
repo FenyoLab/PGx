@@ -36,7 +36,7 @@ import time
 start = time.time()
 proteome = sys.argv[1]
 if len(sys.argv) == 3:
-    infile = fopen(sys.argv[2])
+    infile = open(sys.argv[2])
 else:
     infile = sys.stdin
 

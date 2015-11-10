@@ -101,7 +101,7 @@ def process(peptide, mapping_entry, aa_start):
 
 
 def batch_process(f):
-    print >> sys.stdout, 'track name=peptides description="Peptides identified by Mass Spectrometry" useScore=1 itemRgb="Off"'
+    print >> sys.stdout, 'track name=peptides description="Peptides identified by Mass Spectrometry" useScore=0 itemRgb="On"'
     for l in f:
         vals = l.strip().split("\t")
         peptide = vals[0]
@@ -123,7 +123,7 @@ start_time = time.time()
 
 proteome = sys.argv[1]
 if len(sys.argv) == 3:
-    infile = fopen(sys.argv[2])
+    infile = open(sys.argv[2])
 else:
     infile = sys.stdin
 
