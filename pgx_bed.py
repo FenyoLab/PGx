@@ -6,6 +6,11 @@ def load_mapping(bed_full_path):
     f = open(bed_full_path)
     for l in f:
         (chrom, start, stop, protein, dunno1, strand, dunno2, dunno3, dunno4, exons_count, exon_lengths, exon_starts) = l.strip().split()
+        if exon_lengths.endswith(","):
+            exon_lengths = exon_lengths[:-1]
+        if exon_starts.endswith(","):
+            exon_starts = exon_starts[:-1]
+       
         lengths = map(int, exon_lengths.split(","))
         starts = map(int, exon_starts.split(","))
         mapping[protein] = (chrom, int(start), int(stop), strand, protein, int(exons_count), lengths, starts)
