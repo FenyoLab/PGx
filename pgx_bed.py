@@ -114,6 +114,7 @@ def batch_process(f):
         aa_start = int(vals[2])
         lines = set()
         if not protein in mapping:
+            print >> sys.stderr, "Hit in a protein (%s) which is not mapped by the reference bed file of the '%s' proteome." % (protein, proteome[:-1])
             continue
         else:
             retval = process(peptide, mapping[protein], aa_start)
