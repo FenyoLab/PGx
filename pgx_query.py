@@ -27,7 +27,7 @@ def lookup(aPeptide):
     for code in candidates:
         #Obviously, the proteins should be pre-I/L transformed...
         transeq = proteins[code][1].replace("L", "I")
-        for m in re.finditer(target, transeq):
+        for m in re.finditer('(?=%s)' % target, transeq):
             output.append((proteins[code][0], m.start()+1))
     return output
 
