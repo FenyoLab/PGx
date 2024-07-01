@@ -1,9 +1,6 @@
 import re
 import sys
 
-q = 0
-proteins = None
-peptides = None
 
 def lookup(aPeptide):
     global q
@@ -32,30 +29,37 @@ def lookup(aPeptide):
     return output
 
 
-import time
-start = time.time()
-proteome = sys.argv[1]
-if len(sys.argv) == 3:
-    infile = open(sys.argv[2])
-else:
-    infile = sys.stdin
+if __name__ == "__main__":
 
-import cPickle
+    q = 0
+    proteins = None
+    peptides = None
 
-if not proteome.endswith("/"):
-    proteome += "/"
-f = open(proteome + 'proteome.pickle', 'rb')
-q = cPickle.load(f)
-proteins = cPickle.load(f)
-peptides = cPickle.load(f)
-f.close()
+    import time
+    start = time.time()
+    proteome = sys.argv[1]
+    if len(sys.argv) == 3:
+        infile = open(sys.argv[2])
+    else:
+        infile = sys.stdin
 
-for l in infile:
-    pep = l.strip().split()[0]
-    matches = lookup(pep)
-    for match in matches:
-        print >> sys.stdout, "%s\t%s\t%d" % (pep, match[0], match[1])
-# there is no harm in closing stdin... http://effbot.org/pyfaq/why-doesn-t-closing-sys-stdout-stdin-stderr-really-close-it.htm
-infile.close()
-stop = time.time()
-print >> sys.stderr, "query processed in %.3f seconds" % (stop-start)
+    import pickle
+
+    if not proteome.endswith("/"):
+        proteome += "/"
+    f = open(proteome + 'proteome.pickle', 'rb')
+    q = pickle.load(f)
+    proteins = pickle.load(f)
+    peptides = pickle.load(f)
+    f.close()
+
+    for l in infile:
+        pep = l.strip().split()[0]
+        matches = lookup(pep)
+        for match in matches:
+            print("%s\t%s\t%d" % (pep, match[0], match[1]), file=sys.stdout)
+
+    # there is no harm in closing stdin... http://effbot.org/pyfaq/why-doesn-t-closing-sys-stdout-stdin-stderr-really-close-it.htm
+    infile.close()
+    stop = time.time()
+    print("query processed in %.3f seconds" % (stop-start), file=sys.stderr)

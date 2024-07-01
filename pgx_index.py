@@ -1,9 +1,8 @@
 import time
 import sys
 
-start = time.time()
+import pickle
 
-import cPickle
 
 def index(proteome_path, q=4):
     proteins = {}
@@ -46,17 +45,21 @@ def index(proteome_path, q=4):
 
     db_name = proteome_path + "proteome.pickle"
     f = open(db_name, 'wb')
-    cPickle.dump(q, f)
-    cPickle.dump(proteins, f)
-    cPickle.dump(peptides, f)
+    pickle.dump(q, f)
+    pickle.dump(proteins, f)
+    pickle.dump(peptides, f)
     f.close()
 
 
-proteome_dir = sys.argv[1]
-if not proteome_dir.endswith("/") :
-    proteome_dir += "/"
-index(proteome_dir)
+if __name__ == "__main__":
 
-stop = time.time()
+    start = time.time()
 
-print >> sys.stderr, "Indexing of %s finished in %.3f seconds" % (proteome_dir,stop-start)
+    proteome_dir = sys.argv[1]
+    if not proteome_dir.endswith("/"):
+        proteome_dir += "/"
+    index(proteome_dir)
+
+    stop = time.time()
+
+    print("Indexing of %s finished in %.3f seconds" % (proteome_dir, stop-start), file=sys.stderr)
