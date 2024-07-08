@@ -4,6 +4,8 @@ PGx supports proteogenomic intregration of mass spectrometry (MS) proteomics dat
 ## Installation
 The ideal installation setup for the python script-set which constitutes PGx is as a set of executable scripts in the path of the shell. For this you will need to move the scripts to a repository on the `$PATH` of your shell and add a `#!` line to the top of the script pointing to your preferred python installation. For example, if your python is installed in `/usr/bin/python` you should add `#!/usr/bin/python` to the top of every script, then `chmod` (see explanation for the chmod command [here](https://en.wikipedia.org/wiki/Chmod)) the scripts so they are executable (at which point it is customary to remove the `.py` suffix from the filename).
 
+PGx has been updated to run with Python 3.  It has been tested successfully with Python 3.9.
+
 ## Proteome Directories
 PGx expects custom proteomes to be located in directories, where each directory contains a file called `proteome.fasta` and a file called `proteome.bed`. 
 
